@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@4.0.1  # Utilisation de l'orbe Codecov
-
 jobs:
   build:
     docker:
@@ -16,22 +13,22 @@ jobs:
           name: Generate JaCoCo Report
           command: mvn jacoco:report
       - persist_to_workspace:
-          root: target  # Vous voulez persister le répertoire target contenant les rapports
+          root: target  # Le répertoire où se trouve le rapport JaCoCo
           paths:
-            - site/jacoco  # Persister le répertoire contenant le fichier jacoco.xml
+            - site/jacoco  # Le chemin vers le rapport JaCoCo
 
   upload-coverage:
     docker:
       - image: circleci/openjdk:8
     steps:
       - attach_workspace:
-          at: /workspace  # Attacher le workspace ici
+          at: /workspace  # Attache l'espace de travail au répertoire /workspace
       - run:
-          name: Ensure coverage report exists
-          command: ls /workspace/site/jacoco  # Vérifie si le rapport est bien là
+          name: Check JaCoCo report location
+          command: ls /workspace/site/jacoco  # Vérifie si le rapport est là
       - codecov/upload:
-          file: /workspace/site/jacoco/jacoco.xml  # Le rapport JaCoCo à envoyer à Codecov
-          token: CODECOV_TOKEN  # Assurez-vous que cette variable d'environnement est définie
+          file: /workspace/site/jacoco/jacoco.xml  # Envoi le rapport à Codecov
+          token: CODECOV_TOKEN  # Token pour l'authentification
 
 workflows:
   version: 2
@@ -40,8 +37,4 @@ workflows:
       - build
       - upload-coverage:
           requires:
-            - build  # Assurez-vous que le job "build" a bien été exécuté avant "upload-coverage"
-          filters:
-            branches:
-              only:
-                - master
+            - build  # Le job upload-coverage dépend du job build
