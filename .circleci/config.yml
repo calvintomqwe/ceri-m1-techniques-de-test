@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@4.0.1
+  codecov: codecov/codecov@4.0.1  # Utilisation de l'orbe Codecov
 
 jobs:
   build:
@@ -26,12 +26,9 @@ jobs:
     steps:
       - attach_workspace:
           at: /workspace
-      - run:
-          name: Ensure coverage report exists
-          command: ls /workspace/jacoco
       - codecov/upload:
           file: /workspace/jacoco/jacoco.xml
-          token: $CODECOV_TOKEN 
+          token: CODECOV_TOKEN
 
 workflows:
   version: 2
