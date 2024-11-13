@@ -31,7 +31,7 @@ jobs:
           command: ls /workspace/jacoco
       - codecov/upload:
           file: /workspace/jacoco/jacoco.xml
-          token: eff66ff7-e555-4c3f-815a-9582178d0888
+          token: $CODECOV_TOKEN
 
 workflows:
   version: 2
