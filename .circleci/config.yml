@@ -16,22 +16,22 @@ jobs:
           name: Generate JaCoCo Report
           command: mvn jacoco:report
       - persist_to_workspace:
-          root: target/site  # Rendre accessible le répertoire de rapport JaCoCo
+          root: target  # Vous voulez persister le répertoire target contenant les rapports
           paths:
-            - jacoco  # Assurez-vous que le rapport est bien dans ce dossier
+            - site/jacoco  # Persister le répertoire contenant le fichier jacoco.xml
 
   upload-coverage:
     docker:
       - image: circleci/openjdk:8
     steps:
       - attach_workspace:
-          at: /workspace  # Attachez le workspace à /workspace
+          at: /workspace  # Attacher le workspace ici
       - run:
           name: Ensure coverage report exists
-          command: ls /workspace/jacoco  # Vérifie si le rapport est bien présent
+          command: ls /workspace/site/jacoco  # Vérifie si le rapport est bien là
       - codecov/upload:
-          file: /workspace/jacoco/jacoco.xml  # Le rapport JaCoCo à envoyer à Codecov
-          token: CODECOV_TOKEN  # Utilisation correcte de la variable d'environnement pour le token
+          file: /workspace/site/jacoco/jacoco.xml  # Le rapport JaCoCo à envoyer à Codecov
+          token: CODECOV_TOKEN  # Assurez-vous que cette variable d'environnement est définie
 
 workflows:
   version: 2
@@ -40,7 +40,7 @@ workflows:
       - build
       - upload-coverage:
           requires:
-            - build  # S'assurer que le job "build" a bien été exécuté avant "upload-coverage"
+            - build  # Assurez-vous que le job "build" a bien été exécuté avant "upload-coverage"
           filters:
             branches:
               only:
