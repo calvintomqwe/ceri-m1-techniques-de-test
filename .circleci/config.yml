@@ -1,8 +1,8 @@
 version: 2.1
 
-# Déclaration de l'orb Codecov
+# Déclaration de l'orb Codecov pour envoyer les résultats à Codecov
 orbs:
-  codecov: codecov/codecov@4.0.1  # Charge l'orb Codecov
+  codecov: codecov/codecov@4.0.1
 
 jobs:
   # Job de build qui génère le rapport JaCoCo
@@ -17,31 +17,34 @@ jobs:
       - run:
           name: Generate JaCoCo Report
           command: mvn jacoco:report  # Génére le rapport JaCoCo
+      - run:
+          name: Vérifier le rapport JaCoCo
+          command: ls -la target/site/jacoco  # Vérifie que le répertoire contenant le rapport existe
       - persist_to_workspace:
           root: target  # Le répertoire où se trouvent les fichiers à partager
           paths:
             - site/jacoco  # Le chemin vers le rapport JaCoCo généré
 
-  # Job qui attache l'espace de travail et envoie le rapport à Codecov
+  # Job qui attache l'espace de travail et envoie à Codecov
   upload-coverage:
     docker:
       - image: circleci/openjdk:8  # Utilisation de l'image Docker avec OpenJDK 8
     steps:
       - attach_workspace:
-          at: /workspace  # Attache l'espace de travail au répertoire /workspace
+          at: /workspace  # Attache l'espace de travail à /workspace
       - run:
-          name: Vérifier le rapport JaCoCo
-          command: ls /workspace/site/jacoco  # Vérifie si le fichier est présent
+          name: Vérifier le répertoire JaCoCo dans l'espace de travail
+          command: ls -la /workspace/site/jacoco  # Vérifie que le répertoire est bien attaché et contient les fichiers
       - codecov/upload:
           file: /workspace/site/jacoco/jacoco.xml  # Envoi le rapport JaCoCo à Codecov
-          token: CODECOV_TOKEN  # Token pour l'authentification (assurez-vous qu'il est configuré dans CircleCI)
+          token: CODECOV_TOKEN  # Utilise la variable d'environnement pour le token Codecov
 
 # Définir le workflow
 workflows:
   version: 2
   build-and-upload:
     jobs:
-      - build  # Le job build doit être exécuté en premier
-      - upload-coverage:  # Le job upload-coverage doit être exécuté après build
+      - build  # Le job build doit s'exécuter en premier
+      - upload-coverage:  # Le job upload-coverage dépend de build
           requires:
-            - build  # Le job upload-coverage dépend du job build
+            - build  # Le job upload-coverage ne peut s'exécuter que si build réussit
