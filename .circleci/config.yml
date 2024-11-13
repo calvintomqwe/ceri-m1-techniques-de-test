@@ -8,6 +8,11 @@ jobs:
       - run:
           name: Build with Maven
           command: mvn clean install
+      - run:
+          name: Upload JaCoCo coverage to Codecov
+          command: |
+            # Installer l'outil Codecov
+            curl -s https://codecov.io/bash | bash
 workflows:
   version: 2
   build:
@@ -17,3 +22,4 @@ workflows:
             branches:
               only:
                 - master
+
