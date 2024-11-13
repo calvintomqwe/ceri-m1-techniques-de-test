@@ -2,7 +2,7 @@
 
 ## Auteurs
 - **Nom et Prénom** : Tom Calvin
-- **Groupe** : [Votre Groupe]
+- **Groupe** : M1 CLA 
 
 ## Badges
 
