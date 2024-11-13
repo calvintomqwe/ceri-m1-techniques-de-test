@@ -1,37 +1,31 @@
-# UCE Génie Logiciel Avancé : Techniques de tests
+# Pokedex API
 
-## Introduction
+## Auteurs
+- **Nom et Prénom** : Tom Calvin
+- **Groupe** : [Votre Groupe]
 
-Vous allez à travers ces projet mettre en application une partie des aspects évoqués en cours vis à vis des techniques de tests.  
-Pour cela nous allons réaliser un projet logiciel de petite taille, en suivant la roadmap suivante : 
-- Setup du projet
-- Mise en place des outils d’intégration continue
-- Écriture des tests unitaires
-- Écriture des mocks, et validation des tests
-- Développement dirigé par les tests
-- Documentation et conventions de style
-- Test d'une implémentation donnée
+## Badges
 
-Durant cette série de TPs, le gestionnaire de version Git sera utilisé à foison, à travers la plateforme GitHub. Si vous n’êtes pas à l’aise avec cet outil[^1], [voici](http://rogerdudler.github.io/git-guide/) un petit guide à garder sous la main.
+![CircleCI Status](https://circleci.com/gh/calvintomqwe/ceri-m1-techniques-de-test/badge.svg?style=svg)  
+![Codecov Coverage](https://codecov.io/gh/calvintomqwe/ceri-m1-techniques-de-test/branch/master/graph/badge.svg)
 
-## Sujets
+## Description
 
-L'ensemble des sujets de TPs peut être trouvé dans le dossier `TPs`.
+Ce projet représente une API pour gérer un Pokedex. Il inclut des fonctionnalités pour ajouter, rechercher et afficher des Pokémon à partir d'une base de données.
 
-Le dossier `src` contient la définition de l'ensemble des interfaces qui seront l'objet de vos travaux.
+### Choix techniques d'implémentation
 
-## Rendus
+- **Langage** : Java 8
+- **Framework de tests** : JUnit 5 pour les tests unitaires
+- **Outil de couverture de code** : JaCoCo pour mesurer la couverture de test
+- **CI/CD** : CircleCI pour l'intégration continue et le déploiement
+- **Outil de couverture** : Codecov pour la gestion et la visualisation de la couverture de tests
+- **Gestion des dépendances** : Maven pour la gestion des dépendances et la construction du projet
+- **Mocking** : Mockito pour les tests unitaires et l'isolement des composants
 
-Le rendu des TPs se fait au rythme suivant :
+### Installation
 
-- TP1 : 2ème séance
-- TP2 : 2ème séance
-- TP3 : 3ème séance
-- TP4 : 5ème séance
-- TP5 : dernière séance
-- TP6 : dernière séance
-
-Pour chaque rendu vous devez créer un tag à partir du commit qui correspond à la complétion du TP.  
-Si vous ne spécifiez pas de tag, le dernier commit à la date-heure de la fin de séance sera celui considéré.
-
-[^1]: Si vous n’êtes vraiment pas à l’aise avec cet outil nous vous conseillons quand même vivement de vous y mettre.
+1. Clonez le repository
+   ```bash
+   git clone https://github.com/calvintomqwe/ceri-m1-techniques-de-test.git
+   cd ceri-m1-techniques-de-test
