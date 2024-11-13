@@ -6,7 +6,7 @@
 
 ## Badges
 
-![CircleCI Status](https://circleci.com/gh/calvintomqwe/ceri-m1-techniques-de-test/badge.svg?style=svg)  
+![CircleCI Status](https://undefined/status-badge/img/gh/calvintomqwe/ceri-m1-techniques-de-test/tree/master.svg?style=svg)
 ![Codecov Coverage](https://codecov.io/gh/calvintomqwe/ceri-m1-techniques-de-test/branch/master/graph/badge.svg)
 
 ## Description
