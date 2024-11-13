@@ -1,50 +1,19 @@
 version: 2.1
-
-# Déclaration de l'orb Codecov pour envoyer les résultats à Codecov
-orbs:
-  codecov: codecov/codecov@4.0.1
-
 jobs:
-  # Job de build qui génère le rapport JaCoCo
   build:
     docker:
-      - image: circleci/openjdk:8  # Utilisation de l'image Docker avec OpenJDK 8
+      - image: circleci/openjdk:8
     steps:
-      - checkout  # Vérifie le code source depuis le repository
+      - checkout
       - run:
-          name: Build and Test with Maven
-          command: mvn clean verify  # Exécute le build et les tests Maven
-      - run:
-          name: Generate JaCoCo Report
-          command: mvn jacoco:report  # Génére le rapport JaCoCo
-      - run:
-          name: Vérifier le rapport JaCoCo
-          command: ls -la target/site/jacoco  # Vérifie que le répertoire contenant le rapport existe
-      - persist_to_workspace:
-          root: target  # Le répertoire où se trouvent les fichiers à partager
-          paths:
-            - site/jacoco  # Le chemin vers le rapport JaCoCo généré
-
-  # Job qui attache l'espace de travail et envoie à Codecov
-  upload-coverage:
-    docker:
-      - image: circleci/openjdk:8  # Utilisation de l'image Docker avec OpenJDK 8
-    steps:
-      - attach_workspace:
-          at: /workspace  # Attache l'espace de travail à /workspace
-      - run:
-          name: Vérifier le répertoire JaCoCo dans l'espace de travail
-          command: ls -la /workspace/site/jacoco  # Vérifie que le répertoire est bien attaché et contient les fichiers
-      - codecov/upload:
-          file: /workspace/site/jacoco/jacoco.xml  # Envoi le rapport JaCoCo à Codecov
-          token: CODECOV_TOKEN  # Utilise la variable d'environnement pour le token Codecov
-
-# Définir le workflow
+          name: Build with Maven
+          command: mvn clean install
 workflows:
   version: 2
-  build-and-upload:
+  build:
     jobs:
-      - build  # Le job build doit s'exécuter en premier
-      - upload-coverage:  # Le job upload-coverage dépend de build
-          requires:
-            - build  # Le job upload-coverage ne peut s'exécuter que si build réussit
+      - build:
+          filters:
+            branches:
+              only:
+                - master
