@@ -20,7 +20,7 @@ public class IPokemonTrainerFactoryTest {
 
     @Test
     public void testCreateTrainer() {
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
+        PokemonTrainer trainer = Mockito.mock(PokemonTrainer.class);
 
         Mockito.when(trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory)).thenReturn(trainer);
 
@@ -31,34 +31,40 @@ public class IPokemonTrainerFactoryTest {
 
     @Test
     public void testGetName(){
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
+        PokemonTrainer trainer = Mockito.mock(PokemonTrainer.class);
 
         Mockito.when(trainer.getName()).thenReturn("Ash");
 
-        trainer.getName();
+        String name = trainer.getName();
 
         Mockito.verify(trainer).getName();
+
+        Assert.assertEquals("Ash", name);
     }
 
     @Test
     public void testGetTeam(){
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);    
+        PokemonTrainer trainer = Mockito.mock(PokemonTrainer.class);    
 
         Mockito.when(trainer.getTeam()).thenReturn(Team.MYSTIC);
 
-        trainer.getTeam();
+        Team team = trainer.getTeam();
 
         Mockito.verify(trainer).getTeam();
+
+        Assert.assertEquals(Team.MYSTIC, team);
     }
 
     @Test
     public void testGetPokedex(){
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
+        PokemonTrainer trainer = Mockito.mock(PokemonTrainer.class);
 
-        Mockito.when(trainer.getPokedex()).thenReturn(pokedex);
+        Mockito.when(trainer.getPokedex()).thenReturn(Mockito.mock(IPokedex.class));
 
-        trainer.getPokedex();
+        IPokedex pokedex = trainer.getPokedex();
 
         Mockito.verify(trainer).getPokedex();
+
+        Assert.assertEquals(pokedex, Mockito.mock(IPokedex.class));
     }
 }
