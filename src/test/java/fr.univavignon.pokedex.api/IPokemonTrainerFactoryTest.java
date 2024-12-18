@@ -60,14 +60,17 @@ public class IPokemonTrainerFactoryTest {
 
     @Test
     public void testGetPokedex(){
+
         PokemonTrainer trainer = Mockito.mock(PokemonTrainer.class);
 
-        Mockito.when(trainer.getPokedex()).thenReturn(Mockito.mock(IPokedex.class));
+        IPokedex mockedPokedex = Mockito.mock(IPokedex.class);
+
+        Mockito.when(trainer.getPokedex()).thenReturn(mockedPokedex);
 
         IPokedex pokedex = trainer.getPokedex();
 
         Mockito.verify(trainer).getPokedex();
 
-        assertEquals(pokedex, Mockito.mock(IPokedex.class));
+        assertEquals(mockedPokedex, pokedex);
     }
 }
