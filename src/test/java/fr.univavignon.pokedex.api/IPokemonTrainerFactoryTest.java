@@ -23,13 +23,13 @@ public class IPokemonTrainerFactoryTest {
 
     @Test
     public void testCreateTrainer() {
-        PokemonTrainer trainer = Mockito.mock(PokemonTrainer.class);
+        IPokemonTrainerFactory trainerFactory = new PokemonTrainerFactory();
 
-        Mockito.when(trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory)).thenReturn(trainer);
-
-        trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory);
-
-        Mockito.verify(trainerFactory).createTrainer("Ash", Team.MYSTIC, pokedexFactory);
+        PokemonTrainer trainer = trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory);
+        
+        assertEquals("Ash", trainer.getName());
+        assertEquals(Team.MYSTIC, trainer.getTeam());
+        assertNotNull(trainer.getPokedex());
     }
 
     @Test
