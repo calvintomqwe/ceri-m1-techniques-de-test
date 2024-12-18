@@ -28,4 +28,37 @@ public class IPokemonTrainerFactoryTest {
 
         Mockito.verify(trainerFactory).createTrainer("Ash", Team.MYSTIC, pokedexFactory);
     }
+
+    @Test
+    public void testGetName(){
+        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
+
+        Mockito.when(trainer.getName()).thenReturn("Ash");
+
+        trainer.getName();
+
+        Mockito.verify(trainer).getName();
+    }
+
+    @Test
+    public void testGetTeam(){
+        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);    
+
+        Mockito.when(trainer.getTeam()).thenReturn(Team.MYSTIC);
+
+        trainer.getTeam();
+
+        Mockito.verify(trainer).getTeam();
+    }
+
+    @Test
+    public void testGetPokedex(){
+        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
+
+        Mockito.when(trainer.getPokedex()).thenReturn(pokedex);
+
+        trainer.getPokedex();
+
+        Mockito.verify(trainer).getPokedex();
+    }
 }
