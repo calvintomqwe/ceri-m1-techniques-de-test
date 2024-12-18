@@ -39,7 +39,7 @@ public class IPokemonTrainerFactoryTest {
 
         Mockito.verify(trainer).getName();
 
-        Assert.assertEquals("Ash", name);
+        assertEquals("Ash", name);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class IPokemonTrainerFactoryTest {
 
         Mockito.verify(trainer).getTeam();
 
-        Assert.assertEquals(Team.MYSTIC, team);
+        assertEquals(Team.MYSTIC, team);
     }
 
     @Test
@@ -65,6 +65,6 @@ public class IPokemonTrainerFactoryTest {
 
         Mockito.verify(trainer).getPokedex();
 
-        Assert.assertEquals(pokedex, Mockito.mock(IPokedex.class));
+        assertEquals(pokedex, Mockito.mock(IPokedex.class));
     }
 }
