@@ -1,67 +1,34 @@
 package fr.univavignon.pokedex.api;
 
+import junit.framework.TestCase;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
-public class IPokemonTrainerFactoryTest {
+public class IPokemonTrainerFactoryTest extends TestCase {
 
-    @Mock
     private IPokemonTrainerFactory trainerFactory;
-
-    @Mock
     private IPokedexFactory pokedexFactory;
 
-    @Mock
-    private IPokedex pokedex;
-
-    @Test
-    public void testCreateTrainer() {
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
-
-        Mockito.when(trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory)).thenReturn(trainer);
-
-        trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory);
-
-        Mockito.verify(trainerFactory).createTrainer("Ash", Team.MYSTIC, pokedexFactory);
-
-        assertEquals("Ash", trainer.getName());
-
-        assertEquals(Team.MYSTIC, trainer.getTeam());
-
-        assertEquals(pokedex, trainer.getPokedex());
+    @Before
+    public void setUp() {
+        trainerFactory = new PokemonTrainerFactory();
+        pokedexFactory = new IPokedexFactory() {
+            @Override
+            public IPokedex createPokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
+                return new Pokedex(metadataProvider, pokemonFactory);
+            }
+        };
     }
 
     @Test
-    public void testGetName(){
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
-
-        String name = trainer.getName();
-
-        assertEquals("Ash", name);
-    }
-
-    @Test
-    public void testGetTeam(){
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
-
-        Team team = trainer.getTeam();
-
-        assertEquals(Team.MYSTIC, team);
-    }
-
-    @Test
-    public void testGetPokedex(){
-
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
-
-        IPokedex pokedex2 = trainer.getPokedex();
-
-        assertEquals(pokedex, pokedex2);
+    public void testCreateTrainer() throws PokedexException {
+        PokemonTrainer trainer = trainerFactory.createTrainer("Ash", Team.VALOR, pokedexFactory);
+        assertNotNull("Trainer is null", trainer);
+        assertEquals("Incorrect name", "Ash", trainer.getName());
+        assertEquals("Incorrect team", Team.VALOR, trainer.getTeam());
+        assertNotNull("Pokedex is null", trainer.getPokedex());
     }
 }
