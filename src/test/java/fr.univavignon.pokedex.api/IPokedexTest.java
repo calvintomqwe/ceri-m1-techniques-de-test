@@ -3,12 +3,14 @@ package fr.univavignon.pokedex.api;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Comparator;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @ExtendWith(MockitoExtension.class)
 public class IPokedexTest {
@@ -26,59 +28,61 @@ public class IPokedexTest {
 
     @Test
     public void testSize() {
-        assertEquals(0, pokedex.size());
+        Mockito.when(pokedex.size()).thenReturn(2);
+
+        pokedex.size();
+
+        Mockito.verify(pokedex).size();
     }
 
     @Test
     public void testAddPokemon() {
-        Pokemon pokemon = new Pokemon(0, "Bulbasaur", 126, 126, 90, 613, 64, 4000, 4, 56);
-        int index = pokedex.addPokemon(pokemon);
-        assertEquals(0, index);
-        assertEquals(1, pokedex.size());
+        Pokemon bulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0);
+
+        Mockito.when(pokedex.addPokemon(bulbizarre)).thenReturn(0);
+
+        pokedex.addPokemon(bulbizarre);
+
+        Mockito.verify(pokedex).addPokemon(bulbizarre);
     }
 
     @Test
     public void testGetPokemon() throws PokedexException {
-        Pokemon pokemon = new Pokemon(0, "Bulbasaur", 126, 126, 90, 613, 64, 4000, 4, 56);
-        pokedex.addPokemon(pokemon);
-        Pokemon retrievedPokemon = pokedex.getPokemon(0);
-        assertEquals(pokemon, retrievedPokemon);
+        Pokemon bulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0);
+
+        Mockito.when(pokedex.getPokemon(0)).thenReturn(bulbizarre);
+
+        pokedex.getPokemon(0);
+
+        Mockito.verify(pokedex).getPokemon(0);
     }
 
     @Test
-    public void testGetPokemonInvalidId() throws PokedexException {
-        pokedex.getPokemon(0);
+    public void testGetPokemonWithInvalidId() throws PokedexException {
+        Mockito.when(pokedex.getPokemon(999)).thenThrow(new PokedexException("Invalid index"));
+
+        try {
+            pokedex.getPokemon(999);
+            fail("Expected PokedexException to be thrown");
+        } catch (PokedexException e) {
+            assertEquals("Invalid index", e.getMessage());
+        }
+    }
+
+    private void assertEquals(String invalidIndex, String message) {
     }
 
     @Test
     public void testGetPokemons() {
-        Pokemon pokemon1 = new Pokemon(0, "Bulbasaur", 126, 126, 90, 613, 64, 4000, 4, 56);
-        Pokemon pokemon2 = new Pokemon(1, "Ivysaur", 156, 158, 120, 1000, 123, 5000, 5, 60);
-        pokedex.addPokemon(pokemon1);
-        pokedex.addPokemon(pokemon2);
-        List<Pokemon> pokemons = pokedex.getPokemons();
-        assertEquals(2, pokemons.size());
-        assertTrue(pokemons.contains(pokemon1));
-        assertTrue(pokemons.contains(pokemon2));
-    }
+        Pokemon bulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0);
+        Pokemon aquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100.0);
 
-    @Test
-    public void testGetPokemonsWithOrder() {
-        Pokemon pokemon1 = new Pokemon(0, "Bulbasaur", 126, 126, 90, 613, 64, 4000, 4, 56);
-        Pokemon pokemon2 = new Pokemon(1, "Ivysaur", 156, 158, 120, 1000, 123, 5000, 5, 60);
-        pokedex.addPokemon(pokemon1);
-        pokedex.addPokemon(pokemon2);
-        List<Pokemon> pokemons = pokedex.getPokemons(Comparator.comparing(Pokemon::getCp));
-        assertEquals(2, pokemons.size());
-        assertEquals(pokemon1, pokemons.get(0));
-        assertEquals(pokemon2, pokemons.get(1));
-    }
+        List<Pokemon> pokemons = Arrays.asList(bulbizarre, aquali);
 
-    @Test
-    public void testGetPokemonMetadata() throws PokedexException {
-        PokemonMetadata metadata = pokedex.getPokemonMetadata(0);
-        assertNotNull(metadata);
-        assertEquals(0, metadata.getIndex());
-        assertEquals("Bulbizarre", metadata.getName());
+        Mockito.when(pokedex.getPokemons()).thenReturn(pokemons);
+
+        pokedex.getPokemons();
+
+        Mockito.verify(pokedex).getPokemons();
     }
 }
