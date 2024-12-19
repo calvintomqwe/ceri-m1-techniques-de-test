@@ -1,13 +1,14 @@
 package fr.univavignon.pokedex.api;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class IPokemonTrainerFactoryTest extends TestCase {
+public class IPokemonTrainerFactoryTest {
 
     private IPokemonTrainerFactory trainerFactory;
     private IPokedexFactory pokedexFactory;
@@ -23,12 +24,13 @@ public class IPokemonTrainerFactoryTest extends TestCase {
         };
     }
 
+    @org.junit.Test
     @Test
     public void testCreateTrainer() throws PokedexException {
         PokemonTrainer trainer = trainerFactory.createTrainer("Ash", Team.VALOR, pokedexFactory);
-        assertNotNull("Trainer is null", trainer);
-        assertEquals("Incorrect name", "Ash", trainer.getName());
-        assertEquals("Incorrect team", Team.VALOR, trainer.getTeam());
-        assertNotNull("Pokedex is null", trainer.getPokedex());
+        Assert.assertNotNull("Trainer is null", trainer);
+        Assert.assertEquals("Incorrect name", "Ash", trainer.getName());
+        Assert.assertEquals("Incorrect team", Team.VALOR, trainer.getTeam());
+        Assert.assertNotNull("Pokedex is null", trainer.getPokedex());
     }
 }
