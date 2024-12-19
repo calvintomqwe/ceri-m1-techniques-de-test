@@ -15,11 +15,6 @@ class IPokemonFactoryTest {
     @Mock
     private IPokemonFactory pokemonFactory;
 
-    @BeforeEach
-    public void setUp() {
-        pokemonFactory = new PokemonFactory();
-    }
-
     @Test
     public void testCreatePokemon() {
         // Example data for a Pokemon (let's say Bulbizarre)
@@ -36,8 +31,7 @@ class IPokemonFactoryTest {
 
         Pokemon expectedPokemon = new Pokemon(index, name, attack, defense, stamina, cp, hp, dust, candy, iv);
 
-        when(pokemonFactory.createPokemon(index, cp, hp, dust, candy))
-                .thenReturn(expectedPokemon);
+        when(pokemonFactory.createPokemon(index, cp, hp, dust, candy)).thenReturn(expectedPokemon);
 
         Pokemon result = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
 
