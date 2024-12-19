@@ -13,13 +13,99 @@ jobs:
           command: |
             # Installer l'outil Codecov
             curl -s https://codecov.io/bash | bash
+  checkstyle:
+    docker:
+      - image: cimg/openjdk:11.0  # Java environment
+    steps:
+      - checkout  # Checkout the repository
+      - run:
+          name: Run Checkstyle
+          command: |
+            mvn checkstyle:checkstyle
+            if grep -q "<error " target/checkstyle-result.xml; then
+              echo "Checkstyle Failed" > checkstyle-status.txt
+            else
+              echo "Checkstyle Passed" > checkstyle-status.txt
+            fi
+      - run:
+          name: Generate Checkstyle Badge
+          command: |
+            CHECKSTYLE_STATUS=$(cat checkstyle-status.txt)
+            if [ "$CHECKSTYLE_STATUS" = "Checkstyle Passed" ]; then
+              curl -o checkstyle-badge.svg https://img.shields.io/badge/checkstyle-passed-brightgreen.svg
+            else
+              curl -o checkstyle-badge.svg https://img.shields.io/badge/checkstyle-failed-red.svg
+            fi
+      - store_artifacts:
+          path: checkstyle-badge.svg  # Save the badge as an artifact
+      - run:
+          name: Update Checkstyle Badge on gh-pages
+          command: |
+            git config --global user.name "calvintomqwe"
+            git clone --branch gh-pages https://github.com/calvintomqwe/ceri-m1-techniques-de-test.git ghpages
+            cd ghpages
+            cp ../checkstyle-badge.svg .
+            git add checkstyle-badge.svg
+            git commit -m "Update Checkstyle Badge"
+            git push origin gh-pages
+  deploy-javadoc:
+    docker:
+      - image: cimg/openjdk:11.0
+    steps:
+      - checkout
+      - run:
+          name: Generate Javadoc
+          command: mvn javadoc:javadoc
+      - run:
+          name: Copy Javadoc to a Temporary Directory
+          command: |
+            mkdir -p javadoc-build
+            cp -r target/site/apidocs/* javadoc-build/
+
+      - run:
+          name: Deploy to GitHub Pages
+          command: |
+            git config --global user.name "calvintomqwe"
+            
+            git clone https://github.com/calvintomqwe/ceri-m1-techniques-de-test.git temp-repo
+            cd temp-repo
+            
+            if ! git ls-remote --exit-code origin gh-pages; then
+              git checkout --orphan gh-pages
+              rm -rf *
+              echo "Initial gh-pages branch" > index.html
+              git add index.html
+              git commit -m "Create gh-pages branch"
+              git push origin gh-pages
+            fi
+            cd ..
+              if [ -d "gh-pages" ]; then
+                rm -rf gh-pages
+              fi
+              git clone --branch gh-pages https://github.com/calvintomqwe/ceri-m1-techniques-de-test.git gh-pages
+              cd gh-pages
+              rm -rf *
+              cp -r ../javadoc-build/* .
+              git add .
+              git commit -m "Update Javadoc"
+              git push origin gh-pages
 workflows:
-  version: 2
-  build:
+  sample:
     jobs:
       - build:
           filters:
             branches:
-              only:
-                - master
+              ignore: gh-pages
+      - checkstyle:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: gh-pages
+      - deploy-javadoc:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: gh-pages
 
