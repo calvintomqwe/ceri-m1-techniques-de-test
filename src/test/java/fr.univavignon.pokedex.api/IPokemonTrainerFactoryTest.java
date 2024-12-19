@@ -41,14 +41,18 @@ public class IPokemonTrainerFactoryTest {
     public void testGetName(){
         PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
 
-        assertEquals("Ash", trainer.getName());
+        String name = trainer.getName();
+
+        assertEquals("Ash", name);
     }
 
     @Test
     public void testGetTeam(){
         PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
 
-        assertEquals(Team.MYSTIC, trainer.getTeam());
+        Team team = trainer.getTeam();
+
+        assertEquals(Team.MYSTIC, team);
     }
 
     @Test
@@ -56,6 +60,8 @@ public class IPokemonTrainerFactoryTest {
 
         PokemonTrainer trainer = new PokemonTrainer("Ash", Team.MYSTIC, pokedex);
 
-        assertEquals(pokedex, trainer.getPokedex());
+        IPokedex pokedex2 = trainer.getPokedex();
+
+        assertEquals(pokedex, pokedex2);
     }
 }
