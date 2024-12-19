@@ -8,7 +8,7 @@
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/calvintomqwe/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/calvintomqwe/ceri-m1-techniques-de-test/tree/master)
 ![Codecov Coverage](https://codecov.io/gh/calvintomqwe/ceri-m1-techniques-de-test/branch/master/graph/badge.svg)
-![Checkstyle Status](https://rossmamoun.github.io/ceri-m1-techniques-de-test/checkstyle-badge.svg)
+![Checkstyle Status](https://calvintomqwe.github.io/ceri-m1-techniques-de-test/checkstyle-badge.svg)
 
 ## Description
 
