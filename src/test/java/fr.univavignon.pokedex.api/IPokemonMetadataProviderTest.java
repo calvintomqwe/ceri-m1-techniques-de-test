@@ -5,13 +5,17 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class IPokemonMetadataProviderTest {
 
     private IPokemonMetadataProvider metadataProvider;
     private PokemonMetadata metadata;
 
-    @Before
+    @BeforeEach
     public void setUp() throws PokedexException {
         metadataProvider = new PokemonMetadataProvider();
     }

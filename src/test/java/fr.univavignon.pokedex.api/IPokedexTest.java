@@ -3,9 +3,14 @@ package fr.univavignon.pokedex.api;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.List;
 import java.util.Comparator;
 
+@ExtendWith(MockitoExtension.class)
 public class IPokedexTest {
 
     private IPokedex pokedex;
@@ -14,7 +19,7 @@ public class IPokedexTest {
     private Pokemon pikachu;
     private Comparator<Pokemon> byName;
 
-    @Before
+    @BeforeEach
     public void setUp() throws PokedexException {
 
         PokemonMetadataProvider metadataProvider = new PokemonMetadataProvider();
