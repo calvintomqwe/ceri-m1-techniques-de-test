@@ -44,7 +44,7 @@ jobs:
             git config --global user.email "tom.calvin.aze@gmail.com"
             git config --global user.name "calvintomqwe"
             git clone --branch gh-pages https://github.com/calvintomqwe/ceri-m1-techniques-de-test.git 
-            git add checkstyle-badge.svg
+            git add *
             git commit -m "Update Checkstyle Badges"
             git push origin
   deploy-javadoc:
