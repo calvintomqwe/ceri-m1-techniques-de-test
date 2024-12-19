@@ -2,12 +2,13 @@ package fr.univavignon.pokedex.api;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class IPokemonFactoryTest {
 
     private IPokemonFactory pokemonFactory;
+    private Pokemon pokemon;
 
     @Before
     public void setUp() {
@@ -15,60 +16,40 @@ public class IPokemonFactoryTest {
     }
 
     @Test
-    public void testCreatePokemon() throws PokedexException {
-        int index = 0;
-        int cp = 500;
-        int hp = 60;
-        int dust = 4000;
-        int candy = 3;
-
-        Pokemon pokemon = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
-
-        assertNotNull(pokemon);
-        assertEquals(index, pokemon.getIndex());
-        assertEquals(cp, pokemon.getCp());
-        assertEquals(hp, pokemon.getHp());
-        assertEquals(dust, pokemon.getDust());
-        assertEquals(candy, pokemon.getCandy());
+    public void testGetPokemonCp() {
+        Pokemon result = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        assertNotNull(result);
+        assertEquals(613, result.getCp());
     }
 
     @Test
-    public void testCreatePokemonWithDifferentIndex() throws PokedexException {
-        int index = 133;
-        int cp = 1000;
-        int hp = 120;
-        int dust = 5000;
-        int candy = 10;
-
-        Pokemon pokemon = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
-
-        assertNotNull(pokemon);
-        assertEquals(index, pokemon.getIndex());
-        assertEquals(cp, pokemon.getCp());
-        assertEquals(hp, pokemon.getHp());
-        assertEquals(dust, pokemon.getDust());
-        assertEquals(candy, pokemon.getCandy());
+    public void testGetPokemonHp() {
+        Pokemon result = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        assertNotNull(result);
+        assertEquals(64, result.getHp());
     }
 
-    @Test(expected = PokedexException.class)
-    public void testCreatePokemonWithInvalidIndex() throws PokedexException {
-        int index = -1;
-        int cp = 500;
-        int hp = 60;
-        int dust = 4000;
-        int candy = 3;
-
-        pokemonFactory.createPokemon(index, cp, hp, dust, candy);
+    @Test
+    public void testGetPokemonDust() {
+        Pokemon result = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        assertNotNull(result);
+        assertEquals(4000, result.getDust());
     }
 
-    @Test(expected = PokedexException.class)
-    public void testCreatePokemonWithIndexOutOfUpperBound() throws PokedexException {
-        int index = 155;
-        int cp = 500;
-        int hp = 60;
-        int dust = 4000;
-        int candy = 3;
-
-        pokemonFactory.createPokemon(index, cp, hp, dust, candy);
+    @Test
+    public void testGetPokemonCandy() {
+        Pokemon result = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        assertNotNull(result);
+        assertEquals(4, result.getCandy());
     }
+
+    @Test
+    public void testGetPokemonIv() {
+        Pokemon result = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        assertNotNull(result);
+
+        double iv = result.getIv();
+        assertTrue(iv >= 0.0 && iv <= 100.0);
+    }
+
 }

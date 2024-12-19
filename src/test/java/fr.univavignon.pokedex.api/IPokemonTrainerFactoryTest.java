@@ -1,34 +1,42 @@
 package fr.univavignon.pokedex.api;
 
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-public class IPokemonTrainerFactoryTest extends TestCase {
+public class IPokemonTrainerFactoryTest {
 
     private IPokemonTrainerFactory trainerFactory;
+    private PokemonTrainer trainer;
+    private IPokedex pokedex;
     private IPokedexFactory pokedexFactory;
 
     @Before
     public void setUp() {
+        pokedexFactory = new PokedexFactory();
         trainerFactory = new PokemonTrainerFactory();
-        pokedexFactory = new IPokedexFactory() {
-            @Override
-            public IPokedex createPokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
-                return new Pokedex(metadataProvider, pokemonFactory);
-            }
-        };
+
+        pokedex = pokedexFactory.createPokedex(new PokemonMetadataProvider(), new PokemonFactory());
+
+        trainer = trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory);
     }
 
     @Test
-    public void testCreateTrainer() throws PokedexException {
-        PokemonTrainer trainer = trainerFactory.createTrainer("Ash", Team.VALOR, pokedexFactory);
+    public void testGetName() {
         assertNotNull(trainer);
         assertEquals("Ash", trainer.getName());
-        assertEquals(Team.VALOR, trainer.getTeam());
-        assertNotNull(trainer.getPokedex());
     }
+
+    @Test
+    public void testGetTeam() {
+        assertNotNull(trainer);
+        assertEquals(Team.MYSTIC, trainer.getTeam());
+    }
+
+    @Test
+    public void testGetPokedex() {
+        assertNotNull(trainer);
+        assertEquals(pokedex, trainer.getPokedex());
+    }
+
 }
