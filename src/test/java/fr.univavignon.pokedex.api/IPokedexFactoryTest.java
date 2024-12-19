@@ -1,32 +1,31 @@
 package fr.univavignon.pokedex.api;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 @ExtendWith(MockitoExtension.class)
-public class IPokedexFactoryTest {
+class IPokedexFactoryTest {
 
-    @Mock
     private IPokedexFactory pokedexFactory;
-
-    @Mock
     private IPokemonMetadataProvider metadataProvider;
-
-    @Mock
     private IPokemonFactory pokemonFactory;
 
-    @Mock
-    private IPokedex pokedex;
+    @BeforeEach
+    public void setUp() {
+        pokedexFactory = new PokedexFactory();
+        metadataProvider = new PokemonMetadataProvider();
+        pokemonFactory = new PokemonFactory();
+    }
 
     @Test
     public void testCreatePokedex() {
-        Mockito.when(pokedexFactory.createPokedex(metadataProvider, pokemonFactory)).thenReturn(pokedex);
-
-        pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
-
-        Mockito.verify(pokedexFactory).createPokedex(metadataProvider, pokemonFactory);
+        IPokedex pokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
+        assertNotNull(pokedex);
+        assertEquals(0, pokedex.size());
     }
 }
