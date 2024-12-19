@@ -26,62 +26,72 @@ public class IPokemonFactoryTest {
     }
 
     @Test
-    public void testGetIndex() {
+    public void testIndex() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(0, pokemon.getIndex());
+        int index = pokemon.getIndex();
+        assertEquals(0, index);
     }
 
     @Test
-    public void testGetName() {
+    public void testName() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals("Bulbizarre", pokemon.getName());
+        String name = pokemon.getName();
+        assertEquals("Bulbizarre", name);
     }
 
     @Test
-    public void testGetAttack() {
+    public void testAttack() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(126, pokemon.getAttack());
+        int attack = pokemon.getAttack();
+        assertEquals(126, attack);
     }
 
     @Test
-    public void testGetDefense() {
+    public void testDefense() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(126, pokemon.getDefense());
+        int defense = pokemon.getDefense();
+        assertEquals(126, defense);
     }
 
     @Test
-    public void testGetStamina() {
+    public void testStamina() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(90, pokemon.getStamina());
+        int stamina = pokemon.getStamina();
+        assertEquals(90, stamina);
     }
 
     @Test
-    public void testGetCp() {
+    public void testCp() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(613, pokemon.getCp());
+        int cp = pokemon.getCp();
+        assertEquals(613, cp);
     }
 
     @Test
-    public void testGetHp() {
+    public void testHp() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(64, pokemon.getHp());
+        int hp = pokemon.getHp();
+        assertEquals(64, hp);
     }
 
     @Test
-    public void testGetDust() {
+    public void testDust() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(40, pokemon.getDust());
+        int dust = pokemon.getDust();
+        assertEquals(40, dust);
     }
 
     @Test
-    public void testGetCandy() {
+    public void testCandy() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(4, pokemon.getCandy());
+        int candy = pokemon.getCandy();
+        assertEquals(4, candy);
     }
 
     @Test
-    public void testGetIv() {
+    public void testIv() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
-        assertEquals(56, pokemon.getIv());
+        double iv = pokemon.getIv();
+        assertEquals(56, iv);
     }
 }
