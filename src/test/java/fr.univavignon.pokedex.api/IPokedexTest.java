@@ -1,6 +1,5 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -15,16 +14,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 @ExtendWith(MockitoExtension.class)
 public class IPokedexTest {
 
+    @Mock
     private IPokedex pokedex;
-    private IPokemonMetadataProvider metadataProvider;
-    private IPokemonFactory pokemonFactory;
-
-    @Before
-    public void setUp() {
-        metadataProvider = new PokemonMetadataProvider();
-        pokemonFactory = new PokemonFactory();
-        pokedex = new Pokedex(metadataProvider, pokemonFactory);
-    }
 
     @Test
     public void testSize() {
