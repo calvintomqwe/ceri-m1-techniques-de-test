@@ -2,13 +2,9 @@ package fr.univavignon.pokedex.api;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.Assert.*;
 
-@ExtendWith(MockitoExtension.class)
+
 public class IPokemonTrainerFactoryTest {
 
     private IPokemonTrainerFactory trainerFactory;
@@ -16,7 +12,7 @@ public class IPokemonTrainerFactoryTest {
     private IPokedex pokedex;
     private IPokedexFactory pokedexFactory;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         pokedexFactory = new PokedexFactory();
         trainerFactory = new PokemonTrainerFactory();

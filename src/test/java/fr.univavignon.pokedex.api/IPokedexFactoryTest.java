@@ -1,27 +1,24 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-@ExtendWith(MockitoExtension.class)
-class IPokedexFactoryTest {
+public class IPokedexFactoryTest {
 
-    private IPokemonMetadataProvider metadataProvider;
+    private IPokemonMetadataProvider provider;
     private IPokemonFactory pokemonFactory;
     private IPokedexFactory pokedexFactory;
     private IPokedex pokedex;
 
-    @BeforeEach
+    @Before
     public void setUp() {
-        pokedexFactory = new PokedexFactory();
-        metadataProvider = new PokemonMetadataProvider();
+        provider = new PokemonMetadataProvider();
         pokemonFactory = new PokemonFactory();
+        pokedexFactory = new PokedexFactory();
 
-        pokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
+        pokedex = pokedexFactory.createPokedex(provider, pokemonFactory);
     }
 
     @Test
