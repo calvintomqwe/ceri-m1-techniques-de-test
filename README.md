@@ -18,7 +18,7 @@ Ce projet représente une API pour gérer un Pokedex. Il inclut des fonctionnali
 
 - **Langage** : Java 8
 - **Framework de tests** : JUnit 5 pour les tests unitaires
-- **Outil de couverture de code** : JaCoCo pour mesurer la couverture de test
+- **Outil de couverture de code** : JaCoCo pour mesurer la couverture de tests
 - **CI/CD** : CircleCI pour l'intégration continue et le déploiement
 - **Outil de couverture** : Codecov pour la gestion et la visualisation de la couverture de tests
 - **Gestion des dépendances** : Maven pour la gestion des dépendances et la construction du projet
