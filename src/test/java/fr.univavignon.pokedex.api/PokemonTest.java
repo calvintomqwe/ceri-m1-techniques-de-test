@@ -1,36 +1,67 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class PokemonTest {
 
     @Test
-    public void testGetters() {
+    public void testGetIndex() {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(0, pokemon.getIndex());
+    }
 
-        int index = pokemon.getIndex();
-        String name = pokemon.getName();
-        int attack = pokemon.getAttack();
-        int defense = pokemon.getDefense();
-        int stamina = pokemon.getStamina();
-        int cp = pokemon.getCp();
-        int hp = pokemon.getHp();
-        int dust = pokemon.getDust();
-        int candy = pokemon.getCandy();
-        double iv = pokemon.getIv();
+    @Test
+    public void testGetName() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals("Bulbizarre", pokemon.getName());
+    }
 
-        assertEquals(0, index);
-        assertEquals("Bulbizarre", name);
-        assertEquals(126, attack);
-        assertEquals(126, defense);
-        assertEquals(90, stamina);
-        assertEquals(613, cp);
-        assertEquals(64, hp);
-        assertEquals(40, dust);
-        assertEquals(4, candy);
-        assertEquals(56, iv);
+    @Test
+    public void testGetAttack() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(126, pokemon.getAttack());
+    }
+
+    @Test
+    public void testGetDefense() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(126, pokemon.getDefense());
+    }
+
+    @Test
+    public void testGetStamina() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(90, pokemon.getStamina());
+    }
+
+    @Test
+    public void testGetCp() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(613, pokemon.getCp());
+    }
+
+    @Test
+    public void testGetHp() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(64, pokemon.getHp());
+    }
+
+    @Test
+    public void testGetDust() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(40, pokemon.getDust());
+    }
+
+    @Test
+    public void testGetCandy() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(4, pokemon.getCandy());
+    }
+
+    @Test
+    public void testGetIv() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 40, 4, 56);
+        assertEquals(56, pokemon.getIv());
     }
 }
-
