@@ -137,11 +137,11 @@ public class IPokedexTest {
         anotherPokedex.addPokemon(bulbizarre);
         anotherPokedex.addPokemon(aquali);
 
-        assertEquals(pokedex.hashCode(), anotherPokedex.hashCode());  // Les hashCode doivent être égaux
+        assertEquals(pokedex.hashCode(), anotherPokedex.hashCode());
 
         anotherPokedex.addPokemon(pikachu);
 
-        assertNotEquals(pokedex.hashCode(), anotherPokedex.hashCode());  // Les hashCode doivent être différents après l'ajout d'un Pokémon
+        assertNotEquals(pokedex.hashCode(), anotherPokedex.hashCode());
     }
 
     @Test
