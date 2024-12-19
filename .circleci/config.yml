@@ -36,8 +36,6 @@ jobs:
             else
               curl -o checkstyle-badge.svg https://img.shields.io/badge/checkstyle-failed-red.svg
             fi
-      - store_artifacts:
-          path: checkstyle-badge.svg  # Save the badge as an artifact
       - run:
           name: Update Checkstyle Badge on gh-pages
           command: |
