@@ -47,7 +47,7 @@ jobs:
             cd ghpages
             cp ../checkstyle-badge.svg .
             git add checkstyle-badge.svg
-            git commit -m "Update Checkstyle Badge"
+            git commit -m "Update Checkstyle Badges"
             git push origin gh-pages
   deploy-javadoc:
     docker:
