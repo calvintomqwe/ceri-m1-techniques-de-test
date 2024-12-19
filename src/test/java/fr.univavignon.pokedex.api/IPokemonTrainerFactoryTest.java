@@ -1,6 +1,5 @@
 package fr.univavignon.pokedex.api;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
