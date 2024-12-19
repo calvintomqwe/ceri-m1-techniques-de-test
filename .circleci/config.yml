@@ -41,6 +41,7 @@ jobs:
       - run:
           name: Update Checkstyle Badge on gh-pages
           command: |
+            git config --global user.email "tom.calvin.aze@gmail.com"
             git config --global user.name "calvintomqwe"
             git clone --branch gh-pages https://github.com/calvintomqwe/ceri-m1-techniques-de-test.git ghpages
             cd ghpages
@@ -65,6 +66,7 @@ jobs:
       - run:
           name: Deploy to GitHub Pages
           command: |
+            git config --global user.email "tom.calvin.aze@gmail.com"
             git config --global user.name "calvintomqwe"
             
             git clone https://github.com/calvintomqwe/ceri-m1-techniques-de-test.git temp-repo
