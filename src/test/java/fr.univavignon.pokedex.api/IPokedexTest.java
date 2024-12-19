@@ -29,7 +29,8 @@ public class IPokedexTest {
 
     @Test
     public void testSize() {
-        assertEquals(2, pokedex.size());
+        int size = pokedex.size();
+        assertEquals(2, size);
     }
 
     @Test
