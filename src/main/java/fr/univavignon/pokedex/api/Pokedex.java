@@ -1,9 +1,6 @@
 package fr.univavignon.pokedex.api;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Pokedex implements IPokedex {
 
@@ -57,5 +54,19 @@ public class Pokedex implements IPokedex {
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
         return metadataProvider.getPokemonMetadata(index);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pokedex pokedex = (Pokedex) o;
+        return Objects.equals(pokemons, pokedex.pokemons);
+    }
+
+    // Surcharge de hashCode
+    @Override
+    public int hashCode() {
+        return Objects.hash(pokemons);
     }
 }
